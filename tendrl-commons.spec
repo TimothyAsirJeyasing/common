@@ -19,7 +19,6 @@ Requires: namespaces
 Requires: python-dateutil
 Requires: python-dns
 Requires: python-etcd
-Requires: systemd-python
 Requires: python-urllib3
 Requires: python-six
 Requires: python-docutils

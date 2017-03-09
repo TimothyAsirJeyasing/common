@@ -12,7 +12,6 @@ BuildRequires: pytest
 BuildRequires: python2-devel
 BuildRequires: python-mock
 BuildRequires: python-six
-BuildRequires: systemd
 BuildRequires: python-yaml
 
 Requires: ansible >= 2.2

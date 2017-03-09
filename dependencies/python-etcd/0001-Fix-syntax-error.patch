@@ -1,0 +1,31 @@
+From ea642dd4a83bdae52491b00812d09c6c6098cf8d Mon Sep 17 00:00:00 2001
+From: Timothy Asir J <tjeyasin@redhat.com>
+Date: Thu, 9 Mar 2017 14:27:27 +0530
+Subject: [PATCH] Fix syntax error
+
+Python 2.6.6 used in centos6.5 does not support inline for
+to return list of items without square brakets
+
+Signed-off-by: Timothy Asir J <tjeyasin@redhat.com>
+---
+ src/etcd/tests/unit/test_request.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/etcd/tests/unit/test_request.py b/src/etcd/tests/unit/test_request.py
+index b972a8c..26215f5 100644
+--- a/src/etcd/tests/unit/test_request.py
++++ b/src/etcd/tests/unit/test_request.py
+@@ -316,8 +316,8 @@ class TestClientApiInterface(TestClientApiBase):
+ 
+         self._mock_api(200, d)
+         res = self.client.pop(d['node']['key'])
+-        self.assertEquals({attr: getattr(res, attr) for attr in dir(res)
+-                           if attr in etcd.EtcdResult._node_props}, d['prevNode'])
++        self.assertEquals({attr: [getattr(res, attr) for attr in dir(res)
++                                  if attr in etcd.EtcdResult._node_props]}, d['prevNode'])
+         self.assertEqual(res.value, d['prevNode']['value'])
+ 
+     def test_read(self):
+-- 
+2.4.3
+
